@@ -1,7 +1,7 @@
 package com.bortolanza.bff_agendadortarefas.business;
 
 import com.bortolanza.bff_agendadortarefas.business.dto.in.AddressDTORequest;
-import com.bortolanza.bff_agendadortarefas.business.dto.in.LoginRequestDTO;
+import com.bortolanza.bff_agendadortarefas.business.dto.in.LoginDTORequest;
 import com.bortolanza.bff_agendadortarefas.business.dto.in.PhoneDTORequest;
 import com.bortolanza.bff_agendadortarefas.business.dto.in.UserDTORequest;
 import com.bortolanza.bff_agendadortarefas.business.dto.out.AddressDTOResponse;
@@ -25,7 +25,7 @@ public class UserService {
         return client.saveUser(userDTO);
     }
 
-    public String loginUser(@RequestBody LoginRequestDTO userDTO) {
+    public String loginUser(@RequestBody LoginDTORequest userDTO) {
 
         return client.login(userDTO);
     }

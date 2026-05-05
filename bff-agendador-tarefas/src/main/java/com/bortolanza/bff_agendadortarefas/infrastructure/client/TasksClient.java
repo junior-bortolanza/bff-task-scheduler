@@ -14,29 +14,28 @@ import java.util.List;
 @FeignClient(name = "tasks-scheduler", url = "${tasks-scheduler.url}")
 public interface TasksClient {
 
-
     @PostMapping
-    TasksDTOResponse save(@RequestBody TasksDTORequest dto, @RequestHeader("Authorization") String token);
+    TasksDTOResponse save(@RequestBody TasksDTORequest dto, @RequestHeader(value = "Authorization", required = false) String token);
 
     @GetMapping("/eventos")
     List<TasksDTOResponse> searchListTasksForPeriod(
             @RequestParam("initialDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime initialDate,
             @RequestParam("finalDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime finalDate,
-            @RequestHeader("Authorization") String token);
+            @RequestHeader(value = "Authorization", required = false) String token);
 
     @GetMapping
-   List<TasksDTOResponse> searchTasksByEmail(@RequestHeader("Authorization") String token);
+   List<TasksDTOResponse> searchTasksByEmail(@RequestHeader(value = "Authorization", required = false) String token);
 
     @DeleteMapping
-    void deleteTaskById(@RequestParam("id") String id, @RequestHeader("Authorization") String token);
+    void deleteTaskById(@RequestParam("id") String id, @RequestHeader(value = "Authorization", required = false) String token);
 
     @PatchMapping
     TasksDTOResponse changingStatusNotification(@RequestParam("status") StatusNotificationEnum status,
                                                 @RequestParam("id") String id,
-                                                @RequestHeader("Authorization") String token);
+                                                @RequestHeader(value = "Authorization", required = false) String token);
 
     @PutMapping
     TasksDTOResponse updateTasks(@RequestBody TasksDTORequest dto,
                                  @RequestParam("id") String id,
-                                 @RequestHeader("Authorization") String token);
+                                 @RequestHeader(value = "Authorization", required = false) String token);
 }

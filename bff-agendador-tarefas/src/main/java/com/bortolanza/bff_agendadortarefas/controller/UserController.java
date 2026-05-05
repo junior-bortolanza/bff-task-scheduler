@@ -2,7 +2,7 @@ package com.bortolanza.bff_agendadortarefas.controller;
 
 import com.bortolanza.bff_agendadortarefas.business.UserService;
 import com.bortolanza.bff_agendadortarefas.business.dto.in.AddressDTORequest;
-import com.bortolanza.bff_agendadortarefas.business.dto.in.LoginRequestDTO;
+import com.bortolanza.bff_agendadortarefas.business.dto.in.LoginDTORequest;
 import com.bortolanza.bff_agendadortarefas.business.dto.in.PhoneDTORequest;
 import com.bortolanza.bff_agendadortarefas.business.dto.in.UserDTORequest;
 import com.bortolanza.bff_agendadortarefas.business.dto.out.AddressDTOResponse;
@@ -41,7 +41,7 @@ public class UserController {
     @ApiResponse(responseCode = "200", description = "Usuário logado com sucesso!")
     @ApiResponse(responseCode = "401", description = "Credencias inválidas")
     @ApiResponse(responseCode = "500", description = "Erro de servidor!")
-    public String login(@RequestBody LoginRequestDTO userDTO) {
+    public String login(@RequestBody LoginDTORequest userDTO) {
         return userService.loginUser(userDTO);
     }
 

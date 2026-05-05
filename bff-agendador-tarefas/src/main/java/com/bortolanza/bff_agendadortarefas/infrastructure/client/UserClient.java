@@ -2,7 +2,7 @@ package com.bortolanza.bff_agendadortarefas.infrastructure.client;
 
 
 import com.bortolanza.bff_agendadortarefas.business.dto.in.AddressDTORequest;
-import com.bortolanza.bff_agendadortarefas.business.dto.in.LoginRequestDTO;
+import com.bortolanza.bff_agendadortarefas.business.dto.in.LoginDTORequest;
 import com.bortolanza.bff_agendadortarefas.business.dto.in.PhoneDTORequest;
 import com.bortolanza.bff_agendadortarefas.business.dto.in.UserDTORequest;
 import com.bortolanza.bff_agendadortarefas.business.dto.out.AddressDTOResponse;
@@ -14,41 +14,39 @@ import org.springframework.web.bind.annotation.*;
 @FeignClient(name = "user", url = "${user.url}")
 public interface UserClient {
 
-
-    @GetMapping("/usuario")
+    @GetMapping
     UserDTOResponse searchUserByEmail(@RequestParam("email") String email,
-                                      @RequestHeader("Authorization") String token);
+                                      @RequestHeader(value = "Authorization", required = false) String token);
 
-    @PostMapping("/usuario")
+    @PostMapping
     UserDTOResponse saveUser(@RequestBody UserDTORequest userDTO);
 
     @PostMapping("/login")
-    String login(@RequestBody LoginRequestDTO userDTO);
+    String login(@RequestBody LoginDTORequest userDTO);
 
-
-    @DeleteMapping("/{email}")
+    @DeleteMapping("{email}")
     Void deleteUserByEmail(@PathVariable String email,
-                           @RequestHeader("Authorization") String token);
+                           @RequestHeader(value = "Authorization", required = false) String token);
 
     @PutMapping
     UserDTOResponse updateUser(@RequestBody UserDTORequest dto,
-                              @RequestHeader("Authorization") String token);
+                               @RequestHeader(value = "Authorization", required = false ) String token);
 
     @PutMapping("/endereco")
     AddressDTOResponse updateAddress(@RequestBody AddressDTORequest dto,
                                      @RequestParam("id") Long id,
-                                     @RequestHeader("Authorization") String token);
+                                     @RequestHeader(value = "Authorization", required = false) String token);
 
     @PutMapping("/telefone")
     PhoneDTOResponse updatePhone(@RequestBody PhoneDTORequest dto,
                                  @RequestParam("id") Long id,
-                                 @RequestHeader("Authorization") String token);
+                                 @RequestHeader(value = "Authorization", required = false) String token);
 
     @PostMapping("/endereco")
     AddressDTOResponse registerAddress(@RequestBody AddressDTORequest dto,
-                                      @RequestHeader("Authorization") String token);
+                                       @RequestHeader(value = "Authorization", required = false) String token);
 
     @PostMapping("/telefone")
     PhoneDTOResponse registerPhone(@RequestBody PhoneDTORequest dto,
-                                  @RequestHeader("Authorization") String token);
+                                   @RequestHeader(value = "Authorization", required = false) String token);
 }
