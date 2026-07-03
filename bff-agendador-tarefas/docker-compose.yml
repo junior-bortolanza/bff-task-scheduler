@@ -44,7 +44,7 @@ services:
   postgres:
     image: postgres:latest
     container_name: postgres
-    restart: no
+    restart: "no"
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
@@ -55,7 +55,7 @@ services:
   mongo:
     image: mongo:latest
     container_name: mongo
-    restart: no
+    restart: "no"
     ports:
       - "27017:27017"
     environment:
