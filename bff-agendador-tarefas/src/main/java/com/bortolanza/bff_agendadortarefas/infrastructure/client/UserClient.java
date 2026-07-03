@@ -8,7 +8,9 @@ import com.bortolanza.bff_agendadortarefas.business.dto.in.UserDTORequest;
 import com.bortolanza.bff_agendadortarefas.business.dto.out.AddressDTOResponse;
 import com.bortolanza.bff_agendadortarefas.business.dto.out.PhoneDTOResponse;
 import com.bortolanza.bff_agendadortarefas.business.dto.out.UserDTOResponse;
+import com.bortolanza.bff_agendadortarefas.business.dto.out.ViaCepDTOResponse;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @FeignClient(name = "user", url = "${user.url}")
@@ -49,4 +51,7 @@ public interface UserClient {
     @PostMapping("/telefone")
     PhoneDTOResponse registerPhone(@RequestBody PhoneDTORequest dto,
                                    @RequestHeader(value = "Authorization", required = false) String token);
-}
+
+    @GetMapping("/endereco/{cep}")
+    ResponseEntity<ViaCepDTOResponse> searchDataCep(@PathVariable("cep") String cep);
+    }
