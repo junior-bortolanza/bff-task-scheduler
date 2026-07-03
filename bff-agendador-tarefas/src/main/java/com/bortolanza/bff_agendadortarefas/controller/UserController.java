@@ -8,6 +8,7 @@ import com.bortolanza.bff_agendadortarefas.business.dto.in.UserDTORequest;
 import com.bortolanza.bff_agendadortarefas.business.dto.out.AddressDTOResponse;
 import com.bortolanza.bff_agendadortarefas.business.dto.out.PhoneDTOResponse;
 import com.bortolanza.bff_agendadortarefas.business.dto.out.UserDTOResponse;
+import com.bortolanza.bff_agendadortarefas.business.dto.out.ViaCepDTOResponse;
 import com.bortolanza.bff_agendadortarefas.infrastructure.security.SecurityConfig;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -125,5 +126,15 @@ public class UserController {
                                                          @RequestHeader(name = "Authorization", required = false) String token) {
         return ResponseEntity.ok(userService.registerPhone(token, dto));
     }
+    @PostMapping("/endereco/{cep}")
+    @Operation(summary = "Buscar endereço pelo cep", description = "Busca dados de endereço recebendo um cep")
+    @ApiResponse(responseCode = "200", description = "Dados de endereço retornados com sucesso")
+    @ApiResponse(responseCode = "400", description = "Cep inválido")
+    @ApiResponse(responseCode = "500", description = "Erro de servidor!")
+    public ResponseEntity<ViaCepDTOResponse> searchAddress(@PathVariable("cep") String cep) {
+        return ResponseEntity.ok(userService.searchAddressByCep(cep));
+    }
+
+
 }
 

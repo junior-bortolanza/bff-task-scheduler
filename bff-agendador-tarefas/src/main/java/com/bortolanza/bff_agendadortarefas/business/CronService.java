@@ -3,6 +3,7 @@ package com.bortolanza.bff_agendadortarefas.business;
 import com.bortolanza.bff_agendadortarefas.business.dto.in.LoginDTORequest;
 import com.bortolanza.bff_agendadortarefas.business.dto.out.TasksDTOResponse;
 import com.bortolanza.bff_agendadortarefas.business.enums.StatusNotificationEnum;
+import com.bortolanza.bff_agendadortarefas.infrastructure.message.producer.EmailProducer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,7 +19,7 @@ import java.util.List;
 public class CronService {
 
     private final TasksService service;
-    private final EmailService emailService;
+    private final EmailProducer emailProducer;
     private final UserService userService;
 
     @Value("${user.email}")
@@ -37,9 +38,9 @@ public class CronService {
         List<TasksDTOResponse> taskList = service.searchScheduledTasksByPeriod(presentHour, futureHourPlusFive, token);
         log.info("Tarefas encontradas: " + taskList);
         taskList.forEach(task -> {
-            emailService.sendEmail(task);
+            emailProducer.sendEmail(task);
             log.info("Email enviado para o usuario " + task.getUserEmail());
-            service.changeStatus(StatusNotificationEnum.NOTIFIED, task.getId(),
+            service.changeStatus(StatusNotificationEnum.WAITING, task.getId(),
                     token);
         });
         log.info("Tarefa finalizada com sucesso");

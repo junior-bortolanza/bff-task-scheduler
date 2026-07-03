@@ -7,6 +7,7 @@ import com.bortolanza.bff_agendadortarefas.business.dto.in.UserDTORequest;
 import com.bortolanza.bff_agendadortarefas.business.dto.out.AddressDTOResponse;
 import com.bortolanza.bff_agendadortarefas.business.dto.out.PhoneDTOResponse;
 import com.bortolanza.bff_agendadortarefas.business.dto.out.UserDTOResponse;
+import com.bortolanza.bff_agendadortarefas.business.dto.out.ViaCepDTOResponse;
 import com.bortolanza.bff_agendadortarefas.infrastructure.client.UserClient;
 import lombok.RequiredArgsConstructor;
 
@@ -62,5 +63,9 @@ public class UserService {
 
     public PhoneDTOResponse registerPhone(String token, PhoneDTORequest dto) {
        return client.registerPhone(dto,token);
+    }
+
+    public ViaCepDTOResponse searchAddressByCep(String cep) {
+        return client.searchDataCep(cep).getBody();
     }
 }

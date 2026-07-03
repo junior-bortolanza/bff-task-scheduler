@@ -1,7 +1,6 @@
 package com.bortolanza.bff_agendadortarefas.business.dto.in;
 
 
-import com.bortolanza.bff_agendadortarefas.business.enums.StatusNotificationEnum;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 

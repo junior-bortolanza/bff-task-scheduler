@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 public class FeignConfig {
 
     @Bean
-    public FeignError feingError() {
+    public FeignError feignError() {
         return new FeignError();
     }
 }
